@@ -1,4 +1,4 @@
-# SSAFY Project : MommyLetter
+# Project : MommyLetter
 ### 로그인 , 회원가입
 ![로그인, 회원가입 화면](./exec/Test_scenario/images/login.png)
 
