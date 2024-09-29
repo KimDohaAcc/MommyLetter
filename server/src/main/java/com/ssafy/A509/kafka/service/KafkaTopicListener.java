@@ -30,7 +30,7 @@ public class KafkaTopicListener {
 	/sub/enter/ + chatGroupId 로 입장자의 정보가 송신됨
 	/sub/readCount/ + chatGroupId 로 map<메시지ID, 안읽은 사람 수> 가 전송됨
 	 */
-	@KafkaListener(id = "enterListener", topics = "enter")
+	@KafkaListener(id = "enterListener", topics = "enter", containerFactory = "kafkaListenerContainerFactoryDM")
 	public void listenToEnterTopic(ConsumerRecord<String, KafkaDMRequest> record) {
 		log.info("enter listen ={}", record);
 		Long chatGroupId = record.value().getChatGroupId();
@@ -50,7 +50,7 @@ public class KafkaTopicListener {
 	퇴장에 대한 리스너
 	/sub/leave/ + chatGroupId 로 퇴장자의 정보가 송신됨
  	*/
-	@KafkaListener(id = "leaveListener", topics = "leave")
+	@KafkaListener(id = "leaveListener", topics = "leave", containerFactory = "kafkaListenerContainerFactoryDM")
 	public void listenToLeaveTopic(ConsumerRecord<String, KafkaDMRequest> record) {
 		log.info("leave listen ={}", record);
 		Long chatGroupId = record.value().getChatGroupId();
@@ -68,7 +68,7 @@ public class KafkaTopicListener {
 	/sub/dm/ + chatGroupId 로 채팅 발신 정보가 송신됨
 	/sub/readCount/ + chatGroupId 로 map<메시지ID, 안읽은 사람 수> 가 전송됨
  	*/
-	@KafkaListener(id = "dmListener", topics = "dm")
+	@KafkaListener(id = "dmListener", topics = "dm", containerFactory = "kafkaListenerContainerFactoryDM")
 	public void listenToDMTopic(ConsumerRecord<String, KafkaDMRequest> record) {
 		log.info("dm listen ={}", record);
 		Long chatGroupId = record.value().getChatGroupId();
@@ -85,7 +85,7 @@ public class KafkaTopicListener {
 	/sub/groupChat/ + chatGroupId 로 채팅 발신 정보가 송신됨
 	/sub/readCount/ + chatGroupId 로 map<메시지ID, 안읽은 사람 수> 가 전송됨
  	*/
-	@KafkaListener(id = "groupChatListener", topics = "group-chat")
+	@KafkaListener(id = "groupChatListener", topics = "group-chat", containerFactory = "kafkaListenerContainerFactoryGroupChat")
 	public void listenToGroupChatTopic(ConsumerRecord<String, KafkaDMRequest> record) {
 		log.info("group-chat listen ={}", record);
 		Long chatGroupId = record.value().getChatGroupId();
